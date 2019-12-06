@@ -16,9 +16,34 @@ class _RecommendState extends State<Recommend> {
   // List<Model> data = [];
   List _data = [];
 
+  @override
   void initState() {
     super.initState();
     _loadDataFromNetwork();
+  }
+
+  @override
+  void didChangeDependencies() {
+    // 当此State对象的依赖项更改时调用
+    super.didChangeDependencies();
+  }
+
+  @override
+  void didUpdateWidget(oldWidget) {
+    // 每当窗口小部件配置更改时调用
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void deactivate() {
+    // didMount。从树中删除此对象时调用
+    super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    // 释放资源,将该对象从树中永久删除时调用(动画等)
+    super.dispose();
   }
 
 

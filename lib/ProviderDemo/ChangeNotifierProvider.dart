@@ -51,7 +51,23 @@ class _ChangeNotifierProviderState<T extends ChangeNotifier> extends State<Chang
 	}
 
 	@override
-	void didUpdateWidget(ChangeNotifierProvider<T> oldWidget) {
+	void initState() {
+		// 给model添加监听器
+		widget.data.addListener(update);
+		super.initState();
+	}
+
+	@override
+	void didChangeDependencies() {
+		// 当此State对象的依赖项更改时调用
+		super.didChangeDependencies();
+		//父或祖先widget中的InheritedWidget改变(updateShouldNotify返回true)时会被调用。
+		//如果build中没有依赖InheritedWidget，则此回调不会被调用。
+		print("Dependencies change");
+	}
+
+	@override
+	void didUpdateWidget(oldWidget) {
 		//当Provider更新时，如果新旧数据不"=="，则解绑旧数据监听，同时添加新数据监听
 		if (widget.data != oldWidget.data) {
 			oldWidget.data.removeListener(update);
@@ -61,10 +77,9 @@ class _ChangeNotifierProviderState<T extends ChangeNotifier> extends State<Chang
 	}
 
 	@override
-	void initState() {
-		// 给model添加监听器
-		widget.data.addListener(update);
-		super.initState();
+	void deactivate() {
+		// didMount。从树中删除此对象时调用
+		super.deactivate();
 	}
 
 	@override

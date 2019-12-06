@@ -33,7 +33,7 @@ var barContainer = Container(
   margin: EdgeInsets.fromLTRB(5, 10, 15, 20),
   padding:  EdgeInsets.all(40),
 );
-var listViewTest = ListView.builder(w
+var listViewTest = ListView.builder(
   itemCount: 20,
   padding: EdgeInsets.all(8.0),
   itemExtent: 60.0,
