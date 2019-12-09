@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo/ProviderDemo/ProviderRoute.dart';
+import 'package:flutter_demo/MultipleProvider/main.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_demo/MultipleProvider/LoaderStateModel.dart';
+import 'package:flutter_demo/MultipleProvider/LoaderContainer.dart';
 
 void main() {
 	// 创建一个 MyApp
@@ -24,9 +27,9 @@ class MyApp extends StatelessWidget {
 				),
 				// 我们知道，Flutter 里所有的东西都是 widget。为了把按钮放在屏幕的中央，
 				// 这里使用了 Center（它是一个 widget）。
-				body: Center(
-					child: ProviderRoute(),
-				),
+				body: MultiProvider(
+						providers: [ChangeNotifierProvider<LoaderStateModel>.value(value: LoaderStateModel(LoaderState.Succeed))],
+						child: PresaleOrderDetailInfoPage()),
 			),
 		);
 	}
