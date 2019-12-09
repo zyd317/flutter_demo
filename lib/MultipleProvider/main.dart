@@ -17,7 +17,7 @@ class _PresaleOrderDetailInfoPageState extends State<PresaleOrderDetailInfoPage>
 	/// 调用网络获取订单详情信息
 	void _getOrderDetailInfo() async {
 		_loaderStateModel.changeState(LoaderState.Loading);
-		Future.delayed(Duration(seconds: 3), () { //模拟数据调用
+		Future.delayed(Duration(milliseconds: 100), () { //模拟数据调用
 			_loaderStateModel.changeState(LoaderState.Succeed);
 		});
 	}
@@ -51,20 +51,18 @@ class _PresaleOrderDetailInfoPageState extends State<PresaleOrderDetailInfoPage>
 							child: Column(
 								crossAxisAlignment: CrossAxisAlignment.stretch,
 								children: <Widget>[
-									Text('smkfnjgke'),
+									Text(Provider.of<LoaderStateModel>(context).state.toString()),
 									Text('smkfnsdsdsjgke'),
 									Text('sm1111kfnjgke'),
 									Text('smk22222fnjgke'),
+									RaisedButton(
+										onPressed: _getOrderDetailInfo,
+										child: Text('点我一下'),
+									)
 								],
 							),
 						),
 					),
-					RaisedButton(
-						onPressed: ()=>{
-
-						},
-						child: Text('点我一下'),
-					)
 				],
 			),
 		),
