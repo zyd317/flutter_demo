@@ -14,26 +14,26 @@ class _PresaleOrderDetailInfoPageState extends State<PresaleOrderDetailInfoPage>
 	/// 加载状体模型
 	LoaderStateModel _loaderStateModel;
 
-	/// 调用网络获取订单详情信息
-	void _getOrderDetailInfo() async {
-		_loaderStateModel.changeState(LoaderState.Loading);
-		Future.delayed(Duration(milliseconds: 100), () { //模拟数据调用
-			_loaderStateModel.changeState(LoaderState.Succeed);
-		});
-	}
-
 	@override
 	void didChangeDependencies() {
 		super.didChangeDependencies();
 
 		/// 初始化加载器的状态
-		final loaderStateModel =
-		Provider.of<LoaderStateModel>(context);
+		final loaderStateModel = Provider.of<LoaderStateModel>(context);
 		if (this._loaderStateModel != loaderStateModel) {
 			this._loaderStateModel = loaderStateModel;
-			Future.microtask(() => _getOrderDetailInfo()); //必须要这么做，不然可能会抛出异常，使用Future.microtask执行初始化任务
+			Future.microtask(_getOrderDetailInfo); //必须要这么做，不然可能会抛出异常，使用Future.microtask执行初始化任务
 		}
 	}
+
+	/// 调用网络获取订单详情信息
+	void _getOrderDetailInfo() async {
+		_loaderStateModel.changeState(LoaderState.Loading);
+		Future.delayed(Duration(milliseconds: 1000), () { //模拟数据调用
+			_loaderStateModel.changeState(LoaderState.Succeed);
+		});
+	}
+
 	@override
 	Widget build(BuildContext context) => _buildContentView(context);
 
@@ -52,8 +52,6 @@ class _PresaleOrderDetailInfoPageState extends State<PresaleOrderDetailInfoPage>
 								crossAxisAlignment: CrossAxisAlignment.stretch,
 								children: <Widget>[
 									Text(Provider.of<LoaderStateModel>(context).state.toString()),
-									Text('smkfnsdsdsjgke'),
-									Text('sm1111kfnjgke'),
 									Text('smk22222fnjgke'),
 									RaisedButton(
 										onPressed: _getOrderDetailInfo,
